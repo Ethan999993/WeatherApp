@@ -18,9 +18,9 @@ class MainActivity : ComponentActivity() {
             WeatherAppTheme {
                 Scaffold() { innerPadding ->
 
-                    //CurrentWeather(innerPadding)
+                    CurrentWeather(innerPadding)
 
-                    DailyWeather(innerPadding)
+                    //DailyWeather(innerPadding)
 
                 }
             }
