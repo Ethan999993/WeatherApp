@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Scaffold
-import com.example.weatherapp.ui.screens.DailyWeather
-import com.example.weatherapp.ui.screens.CurrentWeather
+import com.example.weatherapp.ui.Navigation
+
 
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
@@ -16,15 +15,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                Scaffold() { innerPadding ->
-
-                    CurrentWeather(innerPadding)
-
-                    //DailyWeather(innerPadding)
+                Navigation()
 
                 }
             }
         }
     }
-}
+
 

@@ -27,7 +27,7 @@ import com.example.weatherapp.models.Weather
 
 
 @Composable
-fun DailyWeather(innerPadding: PaddingValues){
+fun DailyWeather(){
 
     val weatherList = listOf(
         Weather(
@@ -104,8 +104,7 @@ fun DailyWeather(innerPadding: PaddingValues){
         )
 
     Column(
-        modifier = Modifier.padding(innerPadding),
-                horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Text(

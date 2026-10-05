@@ -21,7 +21,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.models.CurrentConditions
 
 @Composable
-fun CurrentWeather(innerPadding: PaddingValues) {
+fun CurrentWeather() {
 
     val current = CurrentConditions(
         location = "Halifax, Nova Scotia",
@@ -35,8 +35,7 @@ fun CurrentWeather(innerPadding: PaddingValues) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
