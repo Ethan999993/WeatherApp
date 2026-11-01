@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -20,10 +21,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.weatherapp.MainViewModel
 import com.example.weatherapp.ui.screens.CurrentWeather
 import com.example.weatherapp.ui.screens.DailyWeather
 
@@ -34,6 +37,10 @@ fun Navigation() {
 
     val navController = rememberNavController()
     var selectedIndex by remember { mutableIntStateOf(0) } // default set to 0
+
+    val viewModel: MainViewModel = viewModel()
+
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -61,7 +68,9 @@ fun Navigation() {
         bottomBar = {
             NavigationBar(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
-                windowInsets = NavigationBarDefaults.windowInsets)
+                windowInsets = NavigationBarDefaults.windowInsets
+            )
+
             {
                 NavigationBarItem(
                     icon = { Icon(imageVector = Icons.Default.Schedule, contentDescription = "Search") },
@@ -76,7 +85,15 @@ fun Navigation() {
                             launchSingleTop = true
                             restoreState = true
                         }
-                    }
+                    },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        unselectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        unselectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        indicatorColor = MaterialTheme.colorScheme.secondaryContainer
+                    )
+
                 )
                 NavigationBarItem(
                     icon = { Icon(imageVector = Icons.Default.CalendarMonth, contentDescription = "Favorites") },
@@ -91,7 +108,16 @@ fun Navigation() {
                             launchSingleTop = true
                             restoreState = true
                         }
-                    }
+                    },
+
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        unselectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        unselectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        indicatorColor = MaterialTheme.colorScheme.secondaryContainer
+                    )
+
                 )
 
 
@@ -105,10 +131,10 @@ fun Navigation() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = "current") {
-                CurrentWeather()
+                CurrentWeather(viewModel)
             }
             composable(route = "daily") {
-                DailyWeather()
+                DailyWeather(viewModel)
             }
         }
 
